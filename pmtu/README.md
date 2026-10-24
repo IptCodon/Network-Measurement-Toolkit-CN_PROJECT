@@ -1,10 +1,6 @@
 # Path MTU Discovery (PMTU)
 
-<<<<<<< HEAD
-This module implements Path Maximum Transmission Unit (PMTU) discovery for IPv4 as part of the Network Measurement Toolkit for CS-30003 Coding Assignment 1.
-=======
 This module implements Path Maximum Transmission Unit (PMTU) discovery for IPv4 as part of the Network Measurement Toolkit for **CS-30003 Coding Assignment 1 — Project P5**.
->>>>>>> Diptalal-Mtu-Bandwidth
 
 The implementation probes packet sizes using the IPv4 **Don't Fragment (DF)** flag and interprets ICMP responses to estimate the largest working packet size within the configured search range.
 
@@ -18,11 +14,7 @@ The implementation manually constructs the relevant IPv4 and ICMP packet data an
 
 - Manually defined IPv4 header structure.
 - Internet checksum calculation.
-<<<<<<< HEAD
-- IPv4 Don't Fragment flag handling.
-=======
 - IPv4 Don't Fragment (DF) flag handling.
->>>>>>> Diptalal-Mtu-Bandwidth
 - ICMP Echo Request probe construction.
 - Matching probe replies using identifiers and sequence numbers.
 - Handling of ICMP Destination Unreachable — Fragmentation Needed responses.
@@ -43,11 +35,6 @@ pmtu/
 - **`pmtu.c`** contains packet construction, checksum logic, probe handling, and the discovery algorithm.
 - **`pmtu.h`** declares the IPv4 header structure, configuration constants, helper functions, and the `discover_pmtu()` entry point.
 
-<<<<<<< HEAD
-## Build
-
-From the repository root:
-=======
 ## Requirements
 
 - Linux or a compatible environment with raw-socket support.
@@ -60,34 +47,24 @@ The program may require additional consideration when run under WSL, depending o
 ## Build
 
 From the repository root, compile the PMTU module:
->>>>>>> Diptalal-Mtu-Bandwidth
 
 ```bash
 gcc -Wall -Wextra -Wpedantic pmtu/pmtu.c -o pmtu_tool
 ```
 
-<<<<<<< HEAD
-## Run
-
-=======
 The compiler options enable common warnings to help identify potential issues.
 
 ## Run
 
 Run the program with an IPv4 destination address:
 
->>>>>>> Diptalal-Mtu-Bandwidth
 ```bash
 sudo ./pmtu_tool 1.1.1.1
 ```
 
 Replace `1.1.1.1` with the IPv4 destination you are authorized to test.
 
-<<<<<<< HEAD
-The program expects a destination IPv4 address. Raw-socket access may require elevated privileges on Linux or WSL.
-=======
 Raw-socket access may require elevated privileges. The program expects a destination IPv4 address.
->>>>>>> Diptalal-Mtu-Bandwidth
 
 ## How the Algorithm Works
 
@@ -100,11 +77,8 @@ Raw-socket access may require elevated privileges. The program expects a destina
 
 The current configuration defines a search range of **576–1500 bytes**. These sizes refer to the complete IPv4 packet, including its headers.
 
-<<<<<<< HEAD
-=======
 The binary-search procedure relies on having reliable evidence for the working and too-large bounds. An inconclusive probe should not automatically be treated as proof that a packet is too large.
 
->>>>>>> Diptalal-Mtu-Bandwidth
 ## Interpreting Results
 
 - **Echo Reply:** The probe received a matching response, confirming that the tested packet size worked for that probe.
@@ -112,13 +86,9 @@ The binary-search procedure relies on having reliable evidence for the working a
 - **Timeout:** The probe outcome is inconclusive. A timeout does not prove that a packet is too large.
 - **Local packet-size rejection:** A local operating-system error is not the same as a router returning ICMP Fragmentation Needed.
 
-<<<<<<< HEAD
-An exact PMTU claim requires careful interpretation of the evidence. ICMP filtering, rate limiting, changing routes, and local socket restrictions may affect results.
-=======
 An exact PMTU claim requires careful interpretation. ICMP filtering, rate limiting, changing routes, and local socket restrictions may affect results.
 
 The reported value should be understood as an estimate based on the probes and responses observed during the test, not a guarantee that every packet of that size will always traverse the path.
->>>>>>> Diptalal-Mtu-Bandwidth
 
 ## Testing Notes
 
@@ -133,13 +103,6 @@ For reproducible experiments, record:
 
 Repeat tests under different network conditions when possible. Do not treat a timeout alone as evidence of a smaller path MTU.
 
-<<<<<<< HEAD
-## Academic Context
-
-**Course:** CS-30003 — Coding Assignment 1  
-**Project:** P5 — Network Measurement Toolkit  
-**Owner:** Diptalal Pradhan
-=======
 ## Limitations
 
 - ICMP messages may be filtered or rate-limited by firewalls and routers.
@@ -156,6 +119,5 @@ Repeat tests under different network conditions when possible. Do not treat a ti
 - **Project:** P5 — Network Measurement Toolkit
 - **Contributor:** Diptalal Pradhan
 - **Module:** Path MTU Discovery (PMTU)
->>>>>>> Diptalal-Mtu-Bandwidth
 
 This module is part of the team's low-level network measurement project and is intended to demonstrate packet construction, ICMP handling, and active path MTU estimation.
