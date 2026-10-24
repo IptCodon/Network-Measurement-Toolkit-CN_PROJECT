@@ -24,3 +24,19 @@ Because this toolkit utilizes raw sockets, all modules strictly require administ
 **Execution:** 
 `sudo ./traceroute <Target_IP> <-i|-u>`
 -------------------------
+
+### 3) Diptalal Pradhan's PMTU and Bandwidth Estimation modules:
+
+**Description:** Implements IPv4 Path MTU Discovery using raw sockets, ICMP probes, the Don't Fragment (DF) flag, and binary search to estimate the largest packet size that can traverse a network path without fragmentation. It also estimates network bandwidth using packet-pair dispersion by measuring the time difference between corresponding ICMP replies.
+
+**Compilation:**
+gcc -Wall -Wextra -Wpedantic pmtu/pmtu.c -o pmtu_tool
+gcc -Wall -Wextra -Wpedantic bandwidth/bandwidth.c -o bandwidth_tool
+
+**Execution:**
+sudo ./pmtu_tool 1.1.1.1
+sudo ./bandwidth_tool <Target_IP>
+
+**Documentation:** For more details, refer to the PMTU README and Bandwidth Estimation README.
+
+-------------------------
