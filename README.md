@@ -14,3 +14,13 @@ Because this toolkit utilizes raw sockets, all modules strictly require administ
 **Execution:** 
 `sudo ./ping <Target_IP>`
 -------------------------
+
+### 2) Subhasis's Traceroute module part:
+**Description:** A custom traceroute implementation built directly over raw sockets that handles both UDP and ICMP packet crafting. It manually manipulates IP TTL headers to trace the hop sequence and implements strict probe-reply correlation by parsing nested ICMP error messages.
+
+**Compilation:**    
+`gcc traceroute.c -o traceroute`
+
+**Execution:** 
+`sudo ./traceroute <Target_IP> <-i|-u>`
+-------------------------
