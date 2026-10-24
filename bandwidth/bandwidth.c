@@ -51,16 +51,13 @@ static uint16_t read_be16(const uint8_t *p)
     return (uint16_t)(((uint16_t)p[0] << 8) | p[1]);
 }
 
-static double seconds_between(struct timespec start,
-                              struct timespec end)
+static double seconds_between(struct timespec start, struct timespec end)
 {
-    return (double)(end.tv_sec - start.tv_sec) +
-           (double)(end.tv_nsec - start.tv_nsec) / 1e9;
+    return (double)(end.tv_sec - start.tv_sec) + (double)(end.tv_nsec - start.tv_nsec) / 1e9;
 }
 
 /* Send one manually constructed ICMP Echo Request. */
-static int send_echo(int sock, const struct sockaddr_in *target,
-                     uint16_t identifier, uint16_t sequence)
+static int send_echo(int sock, const struct sockaddr_in *target, uint16_t identifier, uint16_t sequence)
 {
     uint8_t packet[PACKET_SIZE];
     memset(packet, 0, sizeof(packet));
@@ -80,9 +77,7 @@ static int send_echo(int sock, const struct sockaddr_in *target,
     packet[2] = (uint8_t)(sum >> 8);
     packet[3] = (uint8_t)(sum & 0xff);
 
-    ssize_t sent = sendto(sock, packet, sizeof(packet), 0,
-                          (const struct sockaddr *)target,
-                          sizeof(*target));
+    ssize_t sent = sendto(sock, packet, sizeof(packet), 0, (const struct sockaddr *)target, sizeof(*target));
 
     if (sent < 0) {
         perror("sendto");
@@ -220,8 +215,7 @@ int main(int argc, char *argv[])
         .tv_usec = 0
     };
 
-    if (setsockopt(sock, SOL_SOCKET, SO_RCVTIMEO,
-                   &timeout, sizeof(timeout)) < 0) {
+    if (setsockopt(sock, SOL_SOCKET, SO_RCVTIMEO, &timeout, sizeof(timeout)) < 0) {
         perror("setsockopt");
         close(sock);
         return 1;
@@ -235,8 +229,7 @@ int main(int argc, char *argv[])
 
     printf("Packet-pair bandwidth experiment\n");
     printf("Destination: %s\n", argv[1]);
-    printf("ICMP payload: %d bytes; %d pairs\n\n",
-           PAYLOAD_SIZE, PAIR_COUNT);
+    printf("ICMP payload: %d bytes; %d pairs\n\n", PAYLOAD_SIZE, PAIR_COUNT);
 
     for (int pair = 0; pair < PAIR_COUNT; pair++) {
         reply_record first = {
@@ -249,8 +242,7 @@ int main(int argc, char *argv[])
             .received = 0
         };
 
-        printf("Pair %2d: sending sequences %u and %u...\n",
-               pair + 1, first.sequence, second.sequence);
+        printf("Pair %2d: sending sequences %u and %u...\n", pair + 1, first.sequence, second.sequence);
 
         /*
          * Send both requests before waiting for replies.
@@ -269,10 +261,7 @@ int main(int argc, char *argv[])
         }
 
         if (result == 0) {
-            printf("  Timeout: received %s reply; pair skipped.\n",
-                   first.received && !second.received ? "first only" :
-                   !first.received && second.received ? "second only" :
-                   "no");
+            printf("  Timeout: received %s reply; pair skipped.\n",first.received && !second.received ? "first only" :!first.received && second.received ? "second only" : "no");
             continue;
         }
 
@@ -294,8 +283,7 @@ int main(int argc, char *argv[])
 
         estimates[valid++] = mbps;
 
-        printf("  Reply gap: %.9f seconds; rough rate: %.3f Mbps\n",
-               gap, mbps);
+        printf("  Reply gap: %.9f seconds; rough rate: %.3f Mbps\n", gap, mbps);
     }
 
     close(sock);
@@ -318,8 +306,7 @@ int main(int argc, char *argv[])
     if (valid % 2 == 1) {
         median = estimates[valid / 2];
     } else {
-        median = (estimates[valid / 2 - 1] +
-                  estimates[valid / 2]) / 2.0;
+        median = (estimates[valid / 2 - 1] + estimates[valid / 2]) / 2.0;
     }
 
     printf("\n========== SUMMARY ==========\n");
