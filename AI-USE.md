@@ -27,3 +27,11 @@ Subhasis Baral (Traceroute Module)
   * **Bandwidth Estimation:** Used AI assistance to understand the packet-pair dispersion approach and interpret timing differences between corresponding ICMP replies, including the limitations of noisy measurements.
   * **Documentation Support:** Used AI assistance to organize and refine the PMTU and bandwidth module README files, including build instructions, execution steps, algorithm descriptions, and testing limitations.
   * **Version Control Guidance:** Received guidance on Git branching, commits, merging, resolving documentation conflicts, and updating the team's shared repository.
+
+  ### Amlan Amrit Behera (Bufferbloat Detection & Integrated Toolkit Module)
+- ** Tools Used: Gemini **
+-** Primary Applications: **
+  - Concurrency & Protocol Concept Clarification: Utilized as a tutor to understand the interaction between multi-threaded POSIX (`pthread`) execution and raw ICMP socket probing, specifically how concurrent high-rate UDP saturation traffic induces queuing delay inflation (bufferbloat) across intermediate router buffers.
+  - System Integration & Implementation Strategy: Discussed C preprocessor macro techniques (`#define` / `#undef`) and header inclusion strategies to cleanly integrate the team's standalone Ping (`ping.c`) and Path MTU Discovery (`pmtu.c` & `pmtu.h`) modules into a unified measurement pipeline without symbol or `main()` function collisions.
+  - Automation & Visualization Scripting: Used the assistant to structure the Python experiment orchestration script (`new_run_experiment.py`) and matplotlib plotting utility (`new_plot_result.py`) for parsing CSV telemetry and generating comparative baseline-versus-loaded RTT visualizations against system `ping` and `mtr` benchmarks.
+  - Debugging & Version Control Support: Analyzed WSL network timeout behaviors (`HTTP 408` RPC errors) and received guidance on isolating feature branch commits (`pr-new-bufferbloat`), resolving divergent branch histories via `git rebase`, and formatting standardized `README.md` documentation.
