@@ -17,3 +17,13 @@ Subhasis Baral (Traceroute Module)
 * Implementation Strategy: Discussed the architectural logic required to effectively toggle between ICMP and UDP traceroute modes, specifically focusing on TTL manipulation and utilizing target port increments.
 * Debugging Support: Analyzed raw socket parsing code with the AI to resolve payload alignment issues, ensuring accurate extraction and matching of the original process ID, sequence numbers, and destination ports for strict probe-reply correlation.
 * Documentation & Formatting: Used the assistant to draft clear, standardized README instructions for compiling and executing the traceroute module and generating commit messages.
+
+### Diptalal Pradhan (PMTU Discovery & Bandwidth Estimation)
+
+* **Tools Used:** ChatGPT
+* **Primary Applications:**
+  * **Protocol Concept Clarification:** Used AI assistance to understand Path MTU Discovery, IPv4's Don't Fragment (DF) flag, ICMP responses, and binary search for estimating the maximum packet size along a network path.
+  * **Implementation & Debugging Support:** Discussed raw socket programming, IPv4 and ICMP packet construction, checksum handling, probe-response matching, timeout handling, and troubleshooting C compilation and runtime errors.
+  * **Bandwidth Estimation:** Used AI assistance to understand the packet-pair dispersion approach and interpret timing differences between corresponding ICMP replies, including the limitations of noisy measurements.
+  * **Documentation Support:** Used AI assistance to organize and refine the PMTU and bandwidth module README files, including build instructions, execution steps, algorithm descriptions, and testing limitations.
+  * **Version Control Guidance:** Received guidance on Git branching, commits, merging, resolving documentation conflicts, and updating the team's shared repository.
