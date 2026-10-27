@@ -29,14 +29,57 @@ Because this toolkit utilizes raw sockets, all modules strictly require administ
 
 **Description:** Implements IPv4 Path MTU Discovery using raw sockets, ICMP probes, the Don't Fragment (DF) flag, and binary search to estimate the largest packet size that can traverse a network path without fragmentation. It also estimates network bandwidth using packet-pair dispersion by measuring the time difference between corresponding ICMP replies.
 
+#### **A) Path MTU Discovery (PMTU)**
+
 **Compilation:**
+
+```bash
 gcc -Wall -Wextra -Wpedantic pmtu/pmtu.c -o pmtu_tool
-gcc -Wall -Wextra -Wpedantic bandwidth/bandwidth.c -o bandwidth_tool
+```
 
 **Execution:**
+
+```bash
 sudo ./pmtu_tool 1.1.1.1
+```
+
+**Documentation:** For more details, refer to the [PMTU README](pmtu/README.md).
+
+#### **B) Bandwidth Estimation**
+
+**Compilation:**
+
+```bash
+gcc -Wall -Wextra -Wpedantic bandwidth/bandwidth.c -o bandwidth_tool
+```
+
+**Execution:**
+
+```bash
 sudo ./bandwidth_tool <Target_IP>
+```
 
-**Documentation:** For more details, refer to the PMTU README and Bandwidth Estimation README.
+**Documentation:** For more details, refer to the [Bandwidth Estimation README](bandwidth/README.md).
 
--------------------------
+**-------------------------**
+
+
+---
+
+### 4) Amlan's Bufferbloat Detection & Integrated Toolkit module part:
+
+**Description:** A multi-threaded bufferbloat detection and active queue analysis engine built over raw ICMP sockets and POSIX threads (`pthread`). It integrates the toolkit's custom Ping, Traceroute, Path MTU Discovery (PMTU), and Bandwidth modules into a unified pipeline. By generating concurrent high-load UDP saturation traffic while probing real-time ICMP Echo RTT, it measures queuing delay inflation (bufferbloat), calculates baseline vs. loaded latency spikes, logs CSV telemetry, and generates automated comparative visualizations against system `ping` and `mtr` benchmarks.
+
+**Compilation:**
+`gcc new_bufferbloat/new_bufferbloat.c -o new_bufferbloat/bufferbloat_bin -lpthread -lm`
+
+## Execution: `sudo ./new_bufferbloat/bufferbloat_bin <Target_IP>`
+
+**Example Target IPs (`<Target_IP>`):**
+- `8.8.8.8` (Google Public DNS — recommended for end-to-end WAN bufferbloat testing and used in system benchmarks: `sudo ./new_bufferbloat/bufferbloat_bin 8.8.8.8`)
+- `1.1.1.1` (Cloudflare DNS — low-latency external reference target)
+- `192.168.1.1` (Local Default Gateway / Router IP — ideal for isolating first-hop Wi-Fi/LAN router queue delay)
+
+**Automated Experiment & Plotting Pipeline:**
+- **Run Full Experiment Suite:** `sudo python3 new_bufferbloat/new_run_experiment.py`
+- **Generate Comparison Plots:** `python3 new_bufferbloat/new_plot_result.py`
